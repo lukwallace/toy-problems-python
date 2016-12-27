@@ -22,6 +22,16 @@ class LinkedList(object):
     self.head = None
     self.tail = None
 
+  def __str__(self):
+    i = self.head
+    res = ''
+    while(i != self.tail):
+      res += i.value + ' -> '
+      i = i.next
+
+    res += i.value
+    return res
+
   def append(self, value):
     n = Node(value)
     if(self.tail == None):
@@ -42,3 +52,4 @@ a.append('Wat')
 a.append('Dup')
 print 'Head value: {}'.format(a.head.value)
 print 'Tail value: {}'.format(a.tail.value)
+print a
