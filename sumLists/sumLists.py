@@ -45,7 +45,7 @@ class LinkedList(object):
 
 A = LinkedList()
 A.append(5)
-A.append(1)
+A.append(6)
 A.append(6)
 
 B = LinkedList()
@@ -53,25 +53,32 @@ B.append(3)
 B.append(4)
 B.append(1)
 
+
 def sumLists(a, b):
   a = a.head
   b = b.head
-  res = 0
-  #Gets the value from the first list
-  ten = 1
-  while(a.next != None):
-    res += a.value * ten
-    ten *= 10
-    a = a.next
-  res += a.value * ten
+  carry = 0
+  res = LinkedList()
 
-  #Gets the value from the second list
   ten = 1
-  while(b.next != None):
-    res += b.value * ten
-    ten *= 10
+  while(a != None and b != None):
+    ab = a.value + b.value + carry
+    carry = 1 if ab >= 10 else 0
+    res.append(ab % 10)
+    a = a.next
     b = b.next
-  res += b.value * ten
+
+  while(a != None):
+    ac = a.value + carry
+    carry = 1 if ac >= 10 else 0
+    res.append(ac % 10)
+    a = a.next
+
+  while(b != None):
+    bc = b.value + carry
+    carry = 1 if bc >= 10 else 0
+    res.append(bc % 10)
+    b = b.next
 
   return res
 
