@@ -53,7 +53,8 @@ B.append(3)
 B.append(4)
 B.append(1)
 
-
+# Make a function that takes two linked lists
+# and outputs the sum in the form of a linked list
 def sumLists(a, b):
   a = a.head
   b = b.head
