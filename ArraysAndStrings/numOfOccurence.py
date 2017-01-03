@@ -11,13 +11,17 @@ def numOfOccurence(string, key):
   counter = 0
 
   for i, c in enumerate(string):
-    substr = string[i:size + i]
+    substr = string[i:len(key) + i]
+    if(len(substr) != size): 
+      break
+
     if(substr == key):
       counter += 1
 
   return counter
 
 # Some tests
+print numOfOccurence('a', 'asdwd') #0
 print numOfOccurence('oafnbdufidbsfoAfn', 'oafn') #2
 print numOfOccurence('tewrwaBcfasaBCabcgadfasdAbcsfaSFD','abc') #4
 print numOfOccurence('aaAAaA', 'a') #6
