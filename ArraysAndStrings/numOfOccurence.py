@@ -7,10 +7,11 @@
 def numOfOccurence(string, key):
   string = string.lower()
   key = key.lower()
+  size = len(key)
   counter = 0
 
   for i, c in enumerate(string):
-    substr = string[i:len(key) + i]
+    substr = string[i:size + i]
     if(substr == key):
       counter += 1
 
