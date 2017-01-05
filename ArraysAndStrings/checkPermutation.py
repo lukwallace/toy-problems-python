@@ -1,9 +1,7 @@
-#Given two strings, write a function that checks if one is
-#permutation of the other.
+# Given two strings, write a function that checks if either is
+# a permutation of the other.
 
-def checkPermutation(str, key):
-  for i, c in enumerate(key):
-    print 'Index: {}, Character: {}'.format(i, c)
+def checkPermutation(strOne, strTwo):
+  return sorted(strOne) == sorted(strTwo)
 
-
-checkPermutation('String', 'Nothing')
+print checkPermutation('String', 'tSring') # True
