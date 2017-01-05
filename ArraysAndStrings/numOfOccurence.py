@@ -22,6 +22,7 @@ def numOfOccurence(string, key):
 
 # Some tests
 print numOfOccurence('a', 'asdwd') #0
+print numOfOccurence('aasdwd', 'asdwd') #1
 print numOfOccurence('oafnbdufidbsfoAfn', 'oafn') #2
 print numOfOccurence('tewrwaBcfasaBCabcgadfasdAbcsfaSFD','abc') #4
 print numOfOccurence('aaAAaA', 'a') #6
