@@ -20,6 +20,6 @@ const compress = (str) => {
 };
 
 // Tests
-console.log(compress('awwwddd')); //a1w3d3
-console.log(compress('aawwss')); //aawwss
-console.log(compress('uibifbwwwwwadddddsddd')); 
+console.log(compress('awwwddd')); // a1w3d3
+console.log(compress('aawwss')); // aawwss
+console.log(compress('uibifbwwwwwadddddsddd')); // uibifbw5ad5sd3
