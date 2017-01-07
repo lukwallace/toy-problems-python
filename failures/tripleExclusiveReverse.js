@@ -1,4 +1,11 @@
-const reverse = (str) => {
+// Write up / Lessons learned:
+// 1) Performance massively degrades when under pressure
+// 2) 'They will have you work in Google Docs' was definitely not a joke
+// 3) Reliance on build systems stagnates mental flexibility
+// 4) Think before you type. Nervously rushing to code does not benefit you.
+
+
+const tripleExclusiveReverse = (str) => {
   let count = 0;
   let curr = '';
   let res = '';
@@ -19,6 +26,6 @@ const reverse = (str) => {
   return res;
 };
 
-console.log(reverse('Wallllace')); // ecalaW
-console.log(reverse('Pencilll')); // icneP
-console.log(reverse('aaAdddds')); // sdAaa
+console.log(tripleExclusiveReverse('Wallllace')); // ecalaW
+console.log(tripleExclusiveReverse('Pencilll')); // icneP
+console.log(tripleExclusiveReverse('aaAdddds')); // sdAaa
