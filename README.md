@@ -1,2 +1,2 @@
-# A place to pratice toy problems / learn new languages
+# Personal Playground for Toy Problem Practice
 
