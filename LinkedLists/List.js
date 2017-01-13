@@ -1,5 +1,3 @@
-// Write code to remove dups from an unsroted linked list
-
 // // Custom logging function for Node, toString makes this useless
 // (function() {
 //   const oldLog = console.log;
