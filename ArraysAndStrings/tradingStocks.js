@@ -29,34 +29,40 @@
 // };
 
 // A more efficient solution
-// Traverse the list alternating between finding the lowest, and finding the highest
+// Traverse the list alternating between finding the contiguous lowest, and contiguous highest
 const getMaxProfit = (prices) => {
   let largest = 0;
   let flag = true;
   let low = prices[0];
   let high = prices[0];
+  // Edge case
+  if(prices.length <= 1) {
+    return 0;
+  }
 
   for(var i = 1; i < prices.length; i++) {
-    if(flag){
-      if(prices[i] <= prices[i-1]) {
-        low = Math.min(low, prices[i]);
-      } else { 
-        flag = !flag;
-        high = prices[i];
-      }
-    } else {
-      if(prices[i] <= prices[i-1]) {
-        flag = !flag;
-        largest = Math.max(largest, high - low);
-        low = prices[i]
-      } else {
-        high = Math.max(high, prices[i]);
-      }
+    if(flag && prices[i] > prices[i-1]) {
+      low = prices[i-1];
+      high = prices[i];
+      largest = Math.max(largest, high - low);
+      
+      flag = !flag;
+      continue;
+    }
+
+    if(!flag && prices[i] < prices[i-1]) {
+      high = prices[i-1];
+      largest = Math.max(largest, high - low);
+
+      low = prices[i];
+      flag = !flag;
+      continue;
     }
   }
   return largest;
 };
 
 // Tests:
-const prices = [10, 7, 5 , 8 , 11, 9];
-console.log(getMaxProfit(prices));
+console.log(getMaxProfit([10, 7, 5, 8 , 11, 9]));
+console.log(getMaxProfit([19, 21, 22, 28, 18, 15, 20, 15]));
+console.log(getMaxProfit([10, 7, 5, 8 , 3, 9, 1, 11]));
