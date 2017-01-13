@@ -15,9 +15,9 @@
 // No 'shortening' -- you must buy before you sell. You may not buy and sell in the same
 // time step (at least 1 minute must pass).
 
-// [Brute force solution] -- O(n^2) where for each element you check every other
-// element ahead of it for the highest sale value. Every possible pair is checked until
-// you have the highest.
+// // [Brute force solution] -- O(n^2) where for each element you check every other
+// // element ahead of it for the highest sale value. Every possible pair is checked until
+// // you have the highest.
 // const getMaxProfit = (prices) => {
 //   let largest = 0;
 //   for(var i = 0; i < prices.length; i++) {
@@ -28,7 +28,7 @@
 //   return largest;
 // };
 
-// A more efficient solution -- O(n)
+// More efficient solution -- O(n)
 // Traverse the list alternating between finding the contiguous lowest, and contiguous highest
 const getMaxProfit = (prices) => {
   let largest = 0;
