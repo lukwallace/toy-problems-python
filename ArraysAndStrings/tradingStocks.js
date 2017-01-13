@@ -28,41 +28,42 @@
 //   return largest;
 // };
 
-// A more efficient solution
+// A more efficient solution -- O(n)
 // Traverse the list alternating between finding the contiguous lowest, and contiguous highest
 const getMaxProfit = (prices) => {
   let largest = 0;
   let flag = true;
-  let low = prices[0];
-  let high = prices[0];
+  let low;
+
   // Edge case
   if(prices.length <= 1) {
     return 0;
   }
 
-  for(var i = 1; i < prices.length; i++) {
-    if(flag && prices[i] > prices[i-1]) {
-      low = prices[i-1];
-      high = prices[i];
-      largest = Math.max(largest, high - low);
-      
+  let prev = prices[0];
+  for(let i = 1; i < prices.length; i++) {
+    // Search for end of decreasing sequence
+    if(flag && prices[i] > prev) {
       flag = !flag;
-      continue;
+      largest = Math.max(largest, prices[i] - prev);
+      low = prev;
     }
-
-    if(!flag && prices[i] < prices[i-1]) {
-      high = prices[i-1];
-      largest = Math.max(largest, high - low);
-
-      low = prices[i];
+    // Search for end of increasing sequence OR if the sequence ends
+    if(!flag && ((prices[i] < prev)|| prices[i+1] === undefined)) {
       flag = !flag;
-      continue;
+      largest = Math.max(largest, prev - low);
+      low = prices[i]
     }
+    prev = prices[i];
   }
   return largest;
 };
 
 // Tests:
-console.log(getMaxProfit([10, 7, 5, 8 , 11, 9]));
-console.log(getMaxProfit([19, 21, 22, 28, 18, 15, 20, 15]));
-console.log(getMaxProfit([10, 7, 5, 8 , 3, 9, 1, 11]));
+console.log(getMaxProfit([4, 5, 6, 6 , 6, 6])) // 2
+console.log(getMaxProfit([10, 7, 5, 8 , 11, 9])); // 6
+console.log(getMaxProfit([4, 5, 2, 2, 1, 1, 8, 4, 4])) // 7
+console.log(getMaxProfit([19, 21, 22, 28, 18, 15, 20, 15])); // 9 
+console.log(getMaxProfit([10, 7, 5, 8 , 3, 9, 1, 11])); // 10
+
+
