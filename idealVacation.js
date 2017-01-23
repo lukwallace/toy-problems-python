@@ -74,11 +74,11 @@ const idealVacation = (attractions) => {
 // console.log(idealVacation([4, 5, 2, 1, 1, 4, 5, 3])); // 6
 // console.log(idealVacation([3, 5, 4, 1, 1, 2, 5, 4])); // 6
 // console.log(idealVacation([1, 3, 2, 5, 3, 4, 5, 2, 1])); // 5
-console.log(idealVacation([3, 3, 2, 5, 5, 3, 4, 5, 3, 2])); // 4
+// console.log(idealVacation([3, 3, 2, 5, 5, 3, 4, 5, 3, 2])); // 4
 // console.log(idealVacation([3, 3, 2, 5, 5, 3, 4, 2])); // 4
-// console.log(idealVacation([1, 1, 3, 3, 2, 1, 5, 5, 3, 4, 5, 3, 2])); // 6
+console.log(idealVacation([1, 1, 3, 3, 2, 1, 5, 5, 3, 4, 5, 3, 2])); // 6
 // console.log(idealVacation([7, 3, 7, 3, 1, 3, 4, 1])); // 5
-console.log(idealVacation([7, 7, 1, 3, 7, 3, 4, 1, 3, 1, 1, 1, 1])); // 4
+// console.log(idealVacation([7, 7, 1, 3, 7, 3, 4, 1, 3, 1, 1, 1, 1])); // 4
 
 
 
