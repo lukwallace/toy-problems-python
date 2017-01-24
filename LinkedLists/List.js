@@ -36,6 +36,17 @@ List.prototype.push = function(value) {
   }
 };
 
+List.prototype.shift = function(value) {
+  const temp = new Node(value);
+  if(!this.head) {
+    this.head = temp;
+    this.tail = temp;
+  } else {
+    temp.next = this.head;
+    this.head = temp;
+  }
+};
+
 List.prototype.toString = function() {
   let res = '';
   let iter = this.head;
