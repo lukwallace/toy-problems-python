@@ -2,6 +2,7 @@
 
 // Here we're defining our stack as just an array with restricted methods.
 // Start: 7:21 PM
+// End: 7:50
 
 // Example [4, 5, 6, 1, 2 ,3] => [6, 5, 4, 3, 2, 1]
 // Where the right end is the top of the stack and left end is the bottom.
