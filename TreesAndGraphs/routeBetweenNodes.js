@@ -4,7 +4,24 @@
 const routeBetweenNodes = (A, B) => {
   const queue = [A];
   while(queue.length > 0) {
-    
+    let node = queue.shift();
+    if(node === B) {
+      return true;
+    }
+    node.edges.forEach((edge) => {
+      queue.push(edge);
+    });
   }
+  return false;
 };
+
+// Test 
+const Two = { edges: []}
+const Four = { edges: []}
+const Three = { edges: [Four]}
+const One = { edges: [Two, Three]}
+
+console.log(routeBetweenNodes(One, Four)); //true
+console.log(routeBetweenNodes(Three, Four)); //true
+console.log(routeBetweenNodes(Two, Four)); //false
 
