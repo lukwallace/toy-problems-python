@@ -38,18 +38,18 @@ const printTree = (rootNode) => {
   while(queue.length !== 0) {
     let node = queue.shift();
     res += node.val;
-    if(node.val === 'null') {
+    if(node.val === 'n') {
       continue;
     }
     if(node.left) {
       queue.push(node.left);
     } else {
-      queue.push({val: 'null'});
+      queue.push({val: 'n'});
     }
     if(node.right) {
       queue.push(node.right);
     } else {
-      queue.push({val: 'null'});
+      queue.push({val: 'n'});
     }
 
   }
