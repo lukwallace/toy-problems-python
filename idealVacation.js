@@ -7,8 +7,8 @@
 // Example:
 // idealVacation([4, 5, 2, 1, 1, 4, 5, 3])  -> 6
 
-
-const idealVacation = (attractions) => {
+// Failing solution
+let idealVacation = (attractions) => {
   const mem = {};
   attractions.forEach((attraction, index) => {
     mem[attraction] = mem[attraction] || [];
@@ -71,14 +71,42 @@ const idealVacation = (attractions) => {
   return res;
 };
 
-// console.log(idealVacation([4, 5, 2, 1, 1, 4, 5, 3])); // 6
-// console.log(idealVacation([3, 5, 4, 1, 1, 2, 5, 4])); // 6
-// console.log(idealVacation([1, 3, 2, 5, 3, 4, 5, 2, 1])); // 5
-// console.log(idealVacation([3, 3, 2, 5, 5, 3, 4, 5, 3, 2])); // 4
-// console.log(idealVacation([3, 3, 2, 5, 5, 3, 4, 2])); // 4
+// Similar problem: http://articles.leetcode.com/finding-minimum-window-in-s-which/
+idealVacation = (attractions) => {
+  const unique = {};
+  attractions.forEach((attraction) => {
+    unique[attraction] = true;
+  });
+
+  const numOfUnique = Object.keys(unique).length;
+  let res = Infinity;
+  const hasFound = {};
+  let begin = 0;
+  for(let end = 0; end < attractions.length; end++) {
+    const last = attractions[end];
+    hasFound[last] = hasFound[last] === undefined ? 1 : hasFound[last] + 1;
+
+    if(Object.keys(hasFound).length === numOfUnique) {
+      let first = attractions[begin]
+      while(hasFound[first] > 1) {
+        hasFound[first] = hasFound[first] - 1;
+        begin++;
+        first = attractions[begin];
+      }
+      res = Math.min(res, end - begin + 1);
+    }
+  }
+  return res;
+};
+
+console.log(idealVacation([4, 5, 2, 1, 1, 4, 5, 3])); // 6
+console.log(idealVacation([3, 5, 4, 1, 1, 2, 5, 4])); // 6
+console.log(idealVacation([1, 3, 2, 5, 3, 4, 5, 2, 1])); // 5
+console.log(idealVacation([3, 3, 2, 5, 5, 3, 4, 5, 3, 2])); // 4
+console.log(idealVacation([3, 3, 2, 5, 5, 3, 4, 2])); // 4
 console.log(idealVacation([1, 1, 3, 3, 2, 1, 5, 5, 3, 4, 5, 3, 2])); // 6
-// console.log(idealVacation([7, 3, 7, 3, 1, 3, 4, 1])); // 5
-// console.log(idealVacation([7, 7, 1, 3, 7, 3, 4, 1, 3, 1, 1, 1, 1])); // 4
+console.log(idealVacation([7, 3, 7, 3, 1, 3, 4, 1])); // 5
+console.log(idealVacation([7, 7, 1, 3, 7, 3, 4, 1, 3, 1, 1, 1, 1])); // 4
 
 
 
