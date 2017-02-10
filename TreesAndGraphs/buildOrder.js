@@ -11,7 +11,7 @@
   //create an adjaceny mapping of the projects
   const graph = {};
   projects.forEach((project) => {
-    graph[project] = { dependsOn: [], startpoint: true,  };
+    graph[project] = { dependsOn: [], incoming: 0,  };
   });
 
   // parse dependencies, define an edge on the graph from A to B
@@ -21,35 +21,34 @@
     const one = dependency[0];
     const two = dependency[1];
     graph[two].dependsOn.push(one);
-    graph[one].startpoint = false;
+    graph[one].incoming++;
   });
 
   const res = [];
+  const queue = [];
   for(let name in graph) {
     let node = graph[name];
-    if(node.startpoint) {
-      const queue = [name];
-      node.seen = true;
-
-      while(queue.length > 0) {
-        let prereq = queue.shift();
-        res.unshift(prereq);
-        if(res.length > projects.length) {
-          return null;
-        }
-        graph[prereq].dependsOn.forEach((item) => {
-          if(graph[item].seen === undefined) {
-            graph[item].seen = true;
-            queue.push(item);
-          }
-        });
-      }
+    if(node.incoming === 0) {
+      queue.push(name);
     }
   }
-  return res;
+
+  while(queue.length > 0) {
+    const prereq = queue.shift();
+    res.unshift(prereq);
+    graph[prereq].dependsOn.forEach((item) => {
+      graph[item].incoming--;
+      if(graph[item].incoming === 0) {
+        queue.push(item);
+      }
+    })
+  }
+
+  return res.length < projects.length ? null : res;
  };
 
  console.log(buildOrder(['a', 'b', 'c', 'd', 'e', 'f'], [['a', 'd'], ['f', 'b'], ['b', 'd'], ['f', 'a'], ['d', 'c']] ))
+ 
 // Review: 
 // Still writing crappy code.
 // Need clear thoughts, and faster completion times.
