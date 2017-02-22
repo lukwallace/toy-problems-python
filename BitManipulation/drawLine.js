@@ -3,10 +3,10 @@ const assert = require('assert');
 
 const drawLine = (screen, width, x1, x2, y) => {
   // Guaranteed none-fractional height.
-  const height = screen.length / width;
+  const height = (screen.length * 8) / width;
 
   // Sets you to the start of the row you're interested in
-  const rowIndex = y * width;
+  const rowIndex = y * width / 8;
 
   // Assuming 0 <= x1 <= x2 <= width*8 
   // Assuming 8bit number representing a pixel value
@@ -20,20 +20,47 @@ const drawLine = (screen, width, x1, x2, y) => {
   // Four cases: Full black, Right black, Left black, Pocket black
   if(startOffset === endOffset) {
     //Pocket black
+    console.log('endIndex:',endIndex)
     const byte = screen[byteIndex];
     const maskOne = ((1 << (8 - startIndex)) - 1);
-    const maskTwo = ((1 << (8 - endIndex)) - 1);
+    const maskTwo = ((1 << (8 - endIndex - 1)) - 1);
     const mask = (~((~maskOne) | maskTwo));
-    screen[headIndex + startOffset] = byte | mask;
+    screen[byteIndex] = byte | mask;
   } else {
+    assert(startIndex === 1);
     // Left black, full black, right black
     const maskOne = ((1 << (8 - startIndex)) - 1);
-    screen[byteIndex] = screen[byteIndex] | mask;
+    screen[byteIndex] = screen[byteIndex] | maskOne;
     byteIndex++;
-    while(byteIndex !== rowIndex + endOffset) {
+    while(byteIndex !== (rowIndex + endOffset)) {
       screen[byteIndex] = 255;
       byteIndex++;
     }
-    const maskTwo = ((1 << (8 - endIndex)) - 1);
-    screen[byteIndex] = (screen[byteIndex] | (~mask));
+    const maskTwo = ((1 << (8 - endIndex - 1)) - 1);
+    screen[byteIndex] = (screen[byteIndex] | (~maskTwo));
+  }
 };
+
+const screen = [
+  parseInt('00000000', 2), parseInt('00000000', 2),
+  parseInt('00000000', 2), parseInt('00000000', 2),
+  parseInt('00000000', 2), parseInt('00000000', 2),
+  parseInt('00000000', 2), parseInt('00000000', 2),
+  parseInt('00000000', 2), parseInt('00000000', 2),
+  parseInt('00000000', 2), parseInt('00000000', 2),
+  parseInt('00000000', 2), parseInt('00000000', 2),
+  parseInt('00000000', 2), parseInt('00000000', 2),
+  parseInt('00000000', 2), parseInt('00000000', 2)
+];
+
+// drawLine(screen, 16, 3, 5, 1);
+drawLine(screen, 16, 1, 13, 2);
+screen.forEach((byte, index) => {
+  // console.log(byte.toString(2));
+  let newline = index % 2 === 1;
+  process.stdout.write(byte.toString(2) + (newline ? '\n' : ', '));
+});
+
+
+
+
