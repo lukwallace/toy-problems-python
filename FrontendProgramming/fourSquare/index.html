@@ -1,0 +1,36 @@
+<html> 
+<head>
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+</body>
+<script>
+  const makeSquare = function(size) {
+    const res = document.createElement('div');
+    res.className += ' square';
+    res.style.height = size + 'px';
+    res.style.width = size + 'px';
+    return res;
+  };
+
+  const onClickFn = function() {
+    console.log(this);
+    const size = Math.floor(this.clientHeight / 2);
+    for(let i = 0; i < 4; i++) {
+      const sqr = makeSquare(size);
+      sqr.onclick = onClickFn.bind(sqr);
+      this.appendChild(sqr);
+    }
+    this.onclick = null;
+  };
+
+
+  const init = function () {
+    const sqr = makeSquare(250);
+    sqr.onclick = onClickFn.bind(sqr);
+    document.body.appendChild(sqr);
+  };
+
+  init();
+</script>
+</html>

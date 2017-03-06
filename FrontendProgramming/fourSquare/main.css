@@ -1,0 +1,16 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+.square { 
+  display: inline-block;
+  border: solid 1px green;
+  border-radius: 5%;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}
