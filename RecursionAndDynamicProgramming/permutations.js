@@ -58,5 +58,12 @@ const permutations = (str) => {
 };
 // console.log(permutationsNoDups("wal"));
 const check = {};
-permutations("aabbcc").forEach(perm => { if(check[perm]) { console.log('Match!', perm) } check[perm] = true});
+permutations("aabbcc").forEach(perm => {
+  if(check[perm]) {
+    console.log('Match!', perm)
+  } 
+  check[perm] = true
+  console.log(perm);
+});
+
 
